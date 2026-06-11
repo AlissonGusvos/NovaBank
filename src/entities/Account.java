@@ -38,16 +38,8 @@ public class Account {
         return balance;
     }
 
-    public void setPassword(int password) {
-        this.password = password;
-    }
-
-    public void addBalance(double amount){
-        balance += amount;
-    }
-
-    public void withdraw(double amount){
-        balance -= amount;
+    public int getPassword() {
+        return password;
     }
 
     private int accountNumGenerete(){
@@ -55,9 +47,20 @@ public class Account {
         return 1000 + random.nextInt(9000);
     }
 
-    public int getAccountNum(){
-        return accountNumber;
+    // Transações
+
+    public void deposit(double amount){
+        balance += amount;
     }
+
+    public void sake(double amount){
+        balance -= amount;
+    }
+
+    public void transfer(double amount){
+
+    }
+
 
     public String toString(){
         return "Número da conta: " +

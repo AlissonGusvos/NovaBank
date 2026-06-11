@@ -1,5 +1,6 @@
 import entities.Account;
 import entities.User;
+import logic.Menu;
 
 public static void main(String[] args) {
     Locale.of("BR");
@@ -54,12 +55,54 @@ public static void main(String[] args) {
         user = new User(name, cpf);
         acc = new Account(0, user, pass);
         System.out.println("Conta Criada!");
-        System.out.print("Número de conta: "+ acc.getAccountNum());
+        System.out.print("Número de conta: "+ acc.getAccountNumber());
         System.out.println("");
     }
     // Conta já existe
 
+    boolean loggedIn = false;
+
     System.out.println("---- Entrar em conta ----");
+    while (!loggedIn) {
+        System.out.print("Conta: ");
+        int numAcc = sc.nextInt();
+        System.out.print("Senha: ");
+        int pass = sc.nextInt();
+
+        if (numAcc == acc.getAccountNumber() && pass == acc.getPassword()){
+            loggedIn = true;
+        }
+        else {
+            System.out.println("Senha ou conta incorreta!");
+        }
+    }
+
+    System.out.println("---- NOVA BANK ----");
+    System.out.println("Seja bem vindo(a) " + user.getName() + "!");
+    System.out.printf("Seu saldo: R$%.2f",acc.getBalance());
+    int opt = Menu.mainMenu(sc);
+
+    switch (opt){
+        case 1:
+            System.out.print("Quantia para depósito: R$");
+            acc.deposit(sc.nextDouble());
+            break;
+        case 2:
+            System.out.print("Quantia para saque: R$");
+            double amount = sc.nextDouble();
+            if (amount >= acc.getBalance()){
+                acc.sake(amount);
+            }
+            else {
+                System.out.println("Saldo insuficiente");
+            }
+            break;
+        case 3:
+            System.out.println("Conta para transferencia: ");
+            
+    }
+
+    // Métodos de interface
 
     sc.close();
 
